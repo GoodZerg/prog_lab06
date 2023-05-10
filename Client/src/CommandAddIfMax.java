@@ -18,12 +18,10 @@ public class CommandAddIfMax extends Command{
     /**
      * Instantiates a new Command add if max.
      *
-     * @param data            the data
      * @param reader          the reader
      * @param isStandardInput the is standard input
      */
-    CommandAddIfMax(DeqCollection<?> data, BufferedReader reader, boolean isStandardInput) {
-        super(data);
+    CommandAddIfMax(BufferedReader reader, boolean isStandardInput) {
         this.reader = reader;
         this.isStandardInput = isStandardInput;
     }

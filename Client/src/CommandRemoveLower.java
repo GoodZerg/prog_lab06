@@ -18,12 +18,10 @@ public class CommandRemoveLower extends Command{
     /**
      * Instantiates a new Command remove lower.
      *
-     * @param data            the data
      * @param reader          the reader
      * @param isStandardInput the is standard input
      */
-    CommandRemoveLower(DeqCollection<?> data, BufferedReader reader, boolean isStandardInput) {
-        super(data);
+    CommandRemoveLower(BufferedReader reader, boolean isStandardInput) {
         this.reader = reader;
         this.isStandardInput = isStandardInput;
     }

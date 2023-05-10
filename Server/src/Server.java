@@ -1,16 +1,32 @@
 import java.net.*;
 import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
 
 public class Server extends Thread {
-    private ServerSocket serverSocket;
+    private ServerSocketChannel serverSocketChannel;
 
     public Server(int port) throws IOException {
-        serverSocket = new ServerSocket(port);
-        serverSocket.setSoTimeout(10000);
+        serverSocketChannel = ServerSocketChannel.open();
+        serverSocketChannel.socket().bind(new InetSocketAddress(port));
+        serverSocketChannel.configureBlocking(false);
     }
 
     public void run() {
-        while(true) {
+        try {
+            while(true){
+                SocketChannel socketChannel =
+                        serverSocketChannel.accept();
+                if(socketChannel != null){
+                    System.out.println(socketChannel.getLocalAddress());
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        /*while(true) {
             try {
                 System.out.println("Ожидание клиента на порт " +
                         serverSocket.getLocalPort() + "...");
@@ -32,6 +48,6 @@ public class Server extends Thread {
                 e.printStackTrace();
                 break;
             }
-        }
+        }*/
     }
 }

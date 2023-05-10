@@ -10,11 +10,9 @@ public class CommandCountByDistance extends Command{
     /**
      * Instantiates a new Command count by distance.
      *
-     * @param data     the data
      * @param distance the distance
      */
-    CommandCountByDistance(DeqCollection<?> data, Integer distance) {
-        super(data);
+    CommandCountByDistance(Integer distance) {
         this.distance = distance;
     }
 

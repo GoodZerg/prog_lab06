@@ -5,10 +5,8 @@ public class CommandExit extends Command{
     /**
      * Instantiates a new Command exit.
      *
-     * @param data the data
      */
-    CommandExit(DeqCollection<?> data) {
-        super(data);
+    CommandExit() {
     }
 
     @Override

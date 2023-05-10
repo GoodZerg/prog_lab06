@@ -11,11 +11,9 @@ public class CommandRemoveById extends Command{
     /**
      * Instantiates a new Command remove by id.
      *
-     * @param data the data
      * @param id   the id
      */
-    CommandRemoveById(DeqCollection<?> data, Long id) {
-        super(data);
+    CommandRemoveById(Long id) {
         this.id = id;
     }
     private <T extends Collectible & Comparable<T>> void fooHelper(DeqCollection<T> data){

@@ -18,13 +18,11 @@ public class CommandUpdate extends Command{
     /**
      * Instantiates a new Command update.
      *
-     * @param data            the data
      * @param id              the id
      * @param reader          the reader
      * @param isStandardInput the is standard input
      */
-    CommandUpdate(DeqCollection<?> data, Long id, BufferedReader reader, boolean isStandardInput) {
-        super(data);
+    CommandUpdate(Long id, BufferedReader reader, boolean isStandardInput) {
         this.id = id;
         this.reader = reader;
         this.isStandardInput = isStandardInput;

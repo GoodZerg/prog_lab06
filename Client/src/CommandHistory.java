@@ -13,10 +13,9 @@ public class CommandHistory extends Command{
     /**
      * Instantiates a new Command history.
      *
-     * @param data the data
      */
-    CommandHistory(DeqCollection<?> data) {
-        super(data);
+    CommandHistory() {
+
     }
 
     @Override

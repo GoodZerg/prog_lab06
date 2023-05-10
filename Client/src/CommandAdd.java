@@ -17,12 +17,10 @@ public class CommandAdd extends Command{
     /**
      * Instantiates a new Command add.
      *
-     * @param data            the data
      * @param reader          the reader
      * @param isStandardInput the is standard input
      */
-    CommandAdd(DeqCollection<?> data, BufferedReader reader, boolean isStandardInput) {
-        super(data);
+    CommandAdd(BufferedReader reader, boolean isStandardInput) {
         this.reader = reader;
         this.isStandardInput = isStandardInput;
     }

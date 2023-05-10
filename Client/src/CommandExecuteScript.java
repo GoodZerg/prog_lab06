@@ -12,11 +12,9 @@ public class CommandExecuteScript extends Command{
     /**
      * Instantiates a new Command execute script.
      *
-     * @param data     the data
      * @param fileName the file name
      */
-    CommandExecuteScript(DeqCollection<?> data, String fileName) {
-        super(data);
+    CommandExecuteScript(String fileName) {
         this.fileName = fileName;
     }
     private boolean checkRecursion(BufferedReader reader, Vector<String> callStack) {
@@ -74,7 +72,7 @@ public class CommandExecuteScript extends Command{
                 System.out.println("Cannot open file");
                 return;
             }
-            Invoker localScriptInvoker = new Invoker(data);
+            Invoker localScriptInvoker = new Invoker();
             try{
                 while(reader.ready()){
                     try {

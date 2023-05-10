@@ -3,6 +3,8 @@ import java.io.*;
 
 public class Main {
     public static void main(String[] args) {
+
+        try {
         /*
         if(args.length != 1){
             System.out.println("Need param");
@@ -17,10 +19,20 @@ public class Main {
             System.out.println(ex.getMessage());
         }
         */
+            String file_name// = args[0];
+                = "src\\start.txt"; //TODO REMOVE DEBUG
+            try {
+                // new DeqCollection<Route>(Route::new, Route[]::new, new OutputHandler(file_name))
+                InputHandler inputHandler = new InputHandler();
+                inputHandler.start(file_name);
+            }catch (RuntimeException ex){
+                System.out.println(ex.getMessage());
+            }
 
-        String serverName = "localhost";
-        int port = 2222;
-        try {
+/*
+            String serverName = "localhost";
+            int port = 2222;
+
             System.out.println("Подключение к " + serverName + " на порт " + port);
             Socket client = new Socket(serverName, port);
 
@@ -34,6 +46,8 @@ public class Main {
 
             System.out.println("Сервер ответил " + in.readUTF());
             client.close();
+
+ */
         } catch (IOException e) {
             e.printStackTrace();
         }
