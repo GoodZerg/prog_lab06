@@ -8,6 +8,7 @@ import java.util.Vector;
  * The type Invoker.
  */
 public class Invoker {
+    private final DeqCollection<?> data;
     private static final Vector<Command> doneCommands = new Vector<Command>();
 
     /**
@@ -92,6 +93,10 @@ public class Invoker {
                 CommandClear.class,
                 0));
         commandsInfo.add(new _CommandInformation(
+                "save",
+                CommandSave.class,
+                0));
+        commandsInfo.add(new _CommandInformation(
                 "execute_script",
                 CommandExecuteScript.class,
                 1));
@@ -151,29 +156,29 @@ public class Invoker {
                             Objects.equals("add_if_max", i.name) ||
                             Objects.equals("remove_lower", i.name)){
                         execute((Command) i.command_class.getDeclaredConstructor(
-                                BufferedReader.class, boolean.class
-                                ).newInstance(reader, isStandardInput));
+                                DeqCollection.class, BufferedReader.class, boolean.class
+                                ).newInstance(data, reader, isStandardInput));
                         return;
                     } else if(words.length == 1){
-                        execute((Command) i.command_class.getDeclaredConstructor()
-                                .newInstance());
+                        execute((Command) i.command_class.getDeclaredConstructor(DeqCollection.class)
+                                .newInstance(data));
                         return;
                     } else if (Objects.equals("update", i.name)){
                         execute((Command) i.command_class.getDeclaredConstructor(
-                                Long.class, BufferedReader.class, boolean.class)
-                                .newInstance(Long.parseLong(words[1]), reader, isStandardInput));
+                                DeqCollection.class, Long.class, BufferedReader.class, boolean.class)
+                                .newInstance(data,Long.parseLong(words[1]), reader, isStandardInput));
                         return;
                     } else if (Objects.equals("remove_by_id", i.name)){
-                        execute((Command) i.command_class.getDeclaredConstructor(Long.class)
-                                .newInstance(Long.parseLong(words[1])));
+                        execute((Command) i.command_class.getDeclaredConstructor(DeqCollection.class, Long.class)
+                                .newInstance(data,Long.parseLong(words[1])));
                         return;
                     }else if (Objects.equals("count_by_distance", i.name)) {
-                        execute((Command) i.command_class.getDeclaredConstructor(Integer.class)
-                                .newInstance(Integer.parseInt(words[1])));
+                        execute((Command) i.command_class.getDeclaredConstructor(DeqCollection.class, Integer.class)
+                                .newInstance(data, Integer.parseInt(words[1])));
                         return;
                     } else if(Objects.equals("execute_script", i.name)){
-                        execute((Command) i.command_class.getDeclaredConstructor(String.class)
-                                .newInstance(words[1]));
+                        execute((Command) i.command_class.getDeclaredConstructor(DeqCollection.class, String.class)
+                                .newInstance(data, words[1]));
                         return;
                     }
                 } else {
@@ -191,19 +196,16 @@ public class Invoker {
      */
     public void execute(Command command){
         doneCommands.add(command);
-
-        ///TODO Serialize + write to server
-
-
         command.execute();
     }
 
     /**
      * Instantiates a new Invoker.
      *
+     * @param data the data
      */
-    public Invoker() {
-
+    public Invoker(DeqCollection<?> data) {
+        this.data = data;
     }
 
     /**

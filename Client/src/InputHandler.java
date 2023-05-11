@@ -35,14 +35,15 @@ public class InputHandler {
         SocketChannel socketChannel = SocketChannel.open();
         socketChannel.configureBlocking(false);
         socketChannel.connect(new InetSocketAddress(serverName,port));
-
+        ///TODO check cannot connect to server
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
 
-        //data.load(new FileReader(file_name));  //TODO ?
+        //data.load(new FileReader(file_name));  //TODO Load on server (write file_name to server with)
 
         try {
-            while (true) {
+            while (!socketChannel.finishConnect()) {
+                /// TODO check server answer
                 try {
                     parser.parseCommand(reader.readLine(), reader, true);
                 } catch (IllegalArgumentException ex) {

@@ -74,7 +74,7 @@ public class CommandExecuteScript extends Command{
                 System.out.println("Cannot open file");
                 return;
             }
-            Invoker localScriptInvoker = new Invoker(data);
+            Invoker localScriptInvoker = new Invoker(data); /// TODO what???
             try{
                 while(reader.ready()){
                     try {
