@@ -10,7 +10,7 @@ public class Main {
                 // new DeqCollection<Route>(Route::new, Route[]::new, new OutputHandler(file_name))
                 InputHandler inputHandler = new InputHandler();
                 inputHandler.start(file_name);
-            }catch (RuntimeException ex){
+            } catch (RuntimeException ex){
                 System.out.println(ex.getMessage());
             }
         } catch (IOException e) {

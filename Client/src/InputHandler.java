@@ -2,17 +2,22 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
+import java.net.ConnectException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.Scanner;
 
 /**
  * The type Input handler.
  */
 public class InputHandler {
     private final Invoker parser;
+    private static final int BUFFER_CAPACITY = 8192;
 
     /**
      * Instantiates a new Input handler.
@@ -34,8 +39,16 @@ public class InputHandler {
 
         SocketChannel socketChannel = SocketChannel.open();
         socketChannel.configureBlocking(false);
+
         socketChannel.connect(new InetSocketAddress(serverName,port));
-        ///TODO check cannot connect to server
+        try {
+            if(socketChannel.finishConnect()) {
+                System.out.println("Connected!");
+            }
+        } catch (ConnectException ex) {
+            System.out.println("Connection error: " + ex.getMessage());
+            return;
+        }
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
 
@@ -43,6 +56,7 @@ public class InputHandler {
 
         try {
             while (!socketChannel.finishConnect()) {
+                Thread.onSpinWait();
                 /// TODO check server answer
                 try {
                     parser.parseCommand(reader.readLine(), reader, true);
@@ -57,6 +71,29 @@ public class InputHandler {
             System.out.println("Error in reading command");
         }
 
+        String request;
+
+        var scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.print("Enter request: ");
+            request = scanner.nextLine();
+
+            ByteBuffer buffer1 = ByteBuffer.wrap(request.getBytes());
+            socketChannel.write(buffer1);
+
+            ByteBuffer buffer = ByteBuffer.allocate(BUFFER_CAPACITY);
+            int bytesCount = 0;
+            while (bytesCount <= 0) {
+                bytesCount = socketChannel.read(buffer);
+            }
+            System.out.println("Bytes received: " + bytesCount);
+            buffer.flip();
+            var response = new String(Arrays.copyOf(buffer.array(), bytesCount));
+            System.out.println("Server responded: " + response);
+        }
+
+//        socketChannel.close();
     }
 
 }
