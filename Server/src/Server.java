@@ -40,10 +40,11 @@ public class Server extends Thread {
                 System.out.println("Reading from: " + key.channel() );
                 String msg = processRead(key);
                 System.out.println("Received data: " + msg);
-                // Response logic
+                ///TODO execute command DESERIALIZE
+
                 if (msg != null) {
                     SocketChannel socketChannel = (SocketChannel) key.channel();
-                    ByteBuffer buffer = ByteBuffer.wrap(("Pidor napisal '" + msg + "'").getBytes());
+                    ByteBuffer buffer = ByteBuffer.wrap(("Client text '" + msg + "'").getBytes());
                     socketChannel.write(buffer);
                 }
             }

@@ -217,7 +217,7 @@ public class Invoker {
             System.out.println("Smt wrong");
         }
 
-        ///TODO Serialize + write to server
+        ///TODO Serialize + write to server ? PASS BUT DESRL NEED CLASS ?
         ///TODO Arg obj? or reading in server part
 
 
