@@ -53,11 +53,10 @@ public class InputHandler {
 
 
         //data.load(new FileReader(file_name));  //TODO Load on server (write file_name to server with)
-
+/*
         try {
             while (!socketChannel.finishConnect()) {
                 Thread.onSpinWait();
-                /// TODO check server answer
                 try {
                     parser.parseCommand(reader.readLine(), reader, true);
                 } catch (IllegalArgumentException ex) {
@@ -70,22 +69,39 @@ public class InputHandler {
         }catch (java.io.IOException ex){
             System.out.println("Error in reading command");
         }
-
+*/
         String request;
 
         var scanner = new Scanner(System.in);
 
         while (true) {
             System.out.print("Enter request: ");
-            request = scanner.nextLine();
+ //           request = scanner.nextLine();
+            parser.setServerInfo(socketChannel);
 
+            try {
+                parser.parseCommand(reader.readLine(), reader, true);
+            } catch (IllegalArgumentException ex) {
+                System.out.println(ex.getMessage());
+                continue;
+            } catch (InvocationTargetException | NoSuchMethodException | InstantiationException |
+                     IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+
+
+/*
             ByteBuffer buffer1 = ByteBuffer.wrap(request.getBytes());
             socketChannel.write(buffer1);
+*/
 
+            ///TODO check hav answer
             ByteBuffer buffer = ByteBuffer.allocate(BUFFER_CAPACITY);
             int bytesCount = 0;
+            int iter = 0;
             while (bytesCount <= 0) {
                 bytesCount = socketChannel.read(buffer);
+                //if(++iter == 30) break;;
             }
             System.out.println("Bytes received: " + bytesCount);
             buffer.flip();

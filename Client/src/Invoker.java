@@ -1,6 +1,10 @@
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.nio.ByteBuffer;
+import java.nio.channels.SocketChannel;
 import java.util.Objects;
 import java.util.Vector;
 
@@ -139,9 +143,14 @@ public class Invoker {
         return new _CommandInformation("Error", Command.class, 0);
     }
 
+    private SocketChannel socketChannel;
+
+    public void setServerInfo(SocketChannel socketChannel){
+        this.socketChannel = socketChannel;
+    }
 
     private void findCommandByName(String[] words, BufferedReader reader, boolean isStandardInput)
-            throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+            throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException{
         String first_word = words[0];
         for (_CommandInformation i :
                 commandsInfo) {
@@ -189,13 +198,30 @@ public class Invoker {
      *
      * @param command the command
      */
-    public void execute(Command command){
+    public void execute(Command command) {
         doneCommands.add(command);
+        if(command.getClass() == CommandExit.class){
+            System.exit(0);
+        }
+        try{
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            ObjectOutputStream os = new ObjectOutputStream(out);
+            os.writeObject(command);
+            os.flush();
+
+            ByteBuffer buffer = ByteBuffer.wrap(out.toByteArray());
+            System.out.println(out);
+
+            socketChannel.write(buffer);
+        } catch (IOException e){
+            System.out.println("Smt wrong");
+        }
 
         ///TODO Serialize + write to server
+        ///TODO Arg obj? or reading in server part
 
 
-        command.execute();
+        //command.execute(); Client execute lab_05
     }
 
     /**
