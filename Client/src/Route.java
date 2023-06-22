@@ -1,12 +1,13 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
  * The type Route.
  */
-public class Route implements Collectible, Comparable<Route>{
+public class Route implements Collectible, Comparable<Route>, Serializable {
     private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null

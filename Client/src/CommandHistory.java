@@ -1,5 +1,6 @@
 import jdk.jfr.Unsigned;
 
+import java.io.Serial;
 import java.util.Vector;
 
 import static java.lang.Math.max;
@@ -8,6 +9,8 @@ import static java.lang.Math.max;
  * The type Command history.
  */
 public class CommandHistory extends Command{
+    @Serial
+    private static final long serialVersionUID = 8;
     private static final int max_history = 6;
 
     /**

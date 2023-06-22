@@ -1,7 +1,9 @@
+import java.io.Serializable;
+
 /**
  * The type Coordinates.
  */
-public class Coordinates implements Comparable<Coordinates>{
+public class Coordinates implements Comparable<Coordinates>, Serializable {
     private long x; //Максимальное значение поля: 211
     private Float y; //Максимальное значение поля: 899, Поле не может быть null
 

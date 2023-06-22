@@ -7,6 +7,8 @@ import java.util.Vector;
  * The type Command execute script.
  */
 public class CommandExecuteScript extends Command{
+    @Serial
+    private static final long serialVersionUID = 5;
     private String fileName;
 
     /**

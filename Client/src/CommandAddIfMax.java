@@ -1,11 +1,14 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.Serial;
 import java.util.Optional;
 
 /**
  * The type Command add if max.
  */
 public class CommandAddIfMax extends Command{
+    @Serial
+    private static final long serialVersionUID = 2;
     /**
      * The Reader.
      */

@@ -1,7 +1,9 @@
+import java.io.Serializable;
+
 /**
  * The type Location.
  */
-public class Location {
+public class Location implements Serializable {
     private Long x; //Поле не может быть null
     private int y;
     private String name; //Строка не может быть пустой, Поле не может быть null

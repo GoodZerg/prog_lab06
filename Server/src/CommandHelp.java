@@ -1,7 +1,11 @@
+import java.io.Serial;
+
 /**
  * The type Command help.
  */
 public class CommandHelp extends Command{
+    @Serial
+    private static final long serialVersionUID = 7;
     /**
      * Instantiates a new Command help.
      *

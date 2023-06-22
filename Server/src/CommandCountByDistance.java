@@ -1,3 +1,4 @@
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -5,6 +6,8 @@ import java.util.Objects;
  * The type Command count by distance.
  */
 public class CommandCountByDistance extends Command{
+    @Serial
+    private static final long serialVersionUID = 4;
     private final Integer distance;
 
     /**

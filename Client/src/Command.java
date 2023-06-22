@@ -1,13 +1,16 @@
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
  * The type Command.
  */
 public abstract class Command implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1337;
     /**
      * The Data.
      */
-    protected DeqCollection<?> data;
+    protected transient DeqCollection<?> data;
 
     /**
      * Sets data.

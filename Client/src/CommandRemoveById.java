@@ -1,3 +1,4 @@
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -6,6 +7,8 @@ import java.util.List;
  * The type Command remove by id.
  */
 public class CommandRemoveById extends Command{
+    @Serial
+    private static final long serialVersionUID = 12;
     private long id;
 
     /**

@@ -1,3 +1,4 @@
+import java.io.Serial;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -7,6 +8,8 @@ import java.util.stream.Stream;
  * The type Command print field descending distance.
  */
 public class CommandPrintFieldDescendingDistance extends Command{
+    @Serial
+    private static final long serialVersionUID = 11;
     /**
      * Instantiates a new Command print field descending distance.
      *

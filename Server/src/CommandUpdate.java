@@ -1,10 +1,13 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.Serial;
 
 /**
  * The type Command update.
  */
 public class CommandUpdate extends Command{
+    @Serial
+    private static final long serialVersionUID = 16;
     private Long id;
     /**
      * The Reader.

@@ -1,3 +1,5 @@
+import java.io.Serial;
+
 /**
  * The type Command info.
  */
@@ -7,6 +9,10 @@ public class CommandInfo extends Command{
      *
      * @param data the data
      */
+
+    @Serial
+    private static final long serialVersionUID = 9;
+
     CommandInfo(DeqCollection<?> data) {
         super(data);
     }
